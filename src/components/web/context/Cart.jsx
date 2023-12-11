@@ -55,10 +55,8 @@ export function ContextCartProvider({ children }) {
         }
     }
    
-    useEffect(() => {
-        clearCartContext();
-    }, [])
-    return <ContextCart.Provider value={{ addToCartContext, getCartContext, removeItemContext, count, setCount,clearCartContext }}>
+   
+    return <ContextCart.Provider value={{ addToCartContext, getCartContext, removeItemContext, count, setCount }}>
         {children}
     </ContextCart.Provider>;
 }

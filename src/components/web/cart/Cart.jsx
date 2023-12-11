@@ -3,7 +3,7 @@ import { ContextCart } from '../context/Cart';
 import './Cart.css'
 import { useQuery } from 'react-query';
 export default function Cart() {
-  const { getCartContext,removeItemContext ,clearCartContext} = useContext(ContextCart);
+  const { getCartContext,removeItemContext } = useContext(ContextCart);
   const getCart = async () => {
     const res = await getCartContext();
     return res;
