@@ -1,0 +1,12 @@
+form{
+    border: solid 6px palevioletred;
+    background-color: pink;
+}
+body{
+    background-color:rgb(241, 181, 201);
+}
+.send-code{
+    background-color: palevioletred;
+    padding: 10px;
+    border: none !important; 
+}

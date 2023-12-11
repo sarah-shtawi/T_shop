@@ -1,0 +1,33 @@
+img{
+    width: 100px;
+    height: 100px;
+}
+.swiper{
+    padding: 40px;
+}
+.category{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+
+}
+.swiper-button-prev , .swiper-button-next{
+    background-color: #fff;
+    color: black;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.swiper-button-prev:after, .swiper-button-next:after{
+    font-size: 20px;
+}
+.swiper-pagination-bullet{
+    background-color: black;;
+}
+.swiper-custom-pagination{
+    display: flex;
+    justify-content: flex-end;
+    padding: 40px;
+    align-items: center;
+}
