@@ -21,8 +21,8 @@ export function UserContextProvider({ children }) {
         if (userToken) {
             const { data } = await axios.get('https://ecommerce-node4.vercel.app/order',
                 { headers: { Authorization: `Tariq__${userToken}` } })
-            console.log(data);
-            setLoading(false);
+                setLoading(false);
+                return data;
         }
     }
     useEffect(() => {
@@ -30,7 +30,7 @@ export function UserContextProvider({ children }) {
         getUserOrder();
     }, [userToken])
 
-    return <UserContext.Provider value={{ userToken, setUserToken, userData, getUserData, setUserData, Loading }}>
+    return <UserContext.Provider value={{ userToken, setUserToken, userData, getUserData, setUserData, Loading ,getUserOrder}}>
         {children}
     </UserContext.Provider>
 }

@@ -75,7 +75,6 @@ export default function Login() {
                 <h2 className='text-center mt-5 mb-0'>Login your account</h2>
                 <form className='p-4 w-50 m-auto mt-4' onSubmit={formik.handleSubmit} >
                     {renderInput}
-
                     <div className='d-flex justify-content-between'>
                         <button type='submit' disabled={!formik.isValid} className="mt-3 p-2 w-25 text-black fw-bold send-data" >Login</button>
                         <Link to='/sendCode' className='mt-4 text-black  fw-bold'>Forget Password</Link>

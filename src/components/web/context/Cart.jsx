@@ -2,7 +2,6 @@ import axios from 'axios';
 import { createContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify'
 export const ContextCart = createContext(null);
-
 export function ContextCartProvider({ children }) {
     let [count, setCount] = useState(0);
     const addToCartContext = async (productId) => {
@@ -87,17 +86,19 @@ export function ContextCartProvider({ children }) {
         }
     }
 
-    const creatOrderContext = async (address,phone) => {
-        try{
-            const token = localStorage.getItem('userToken');
-            const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/order`,{address,phone} ,
-            {headers: { Authorization: `Tariq__${token}` } });
-            return data;
-        }catch(error){
-            console.log(error);
-        }
-    }
-   
+    // const creatOrder = async (address,phoneNumber)=>{
+    //     try{
+    //         const token = localStorage.getItem('userToken');
+    //         const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/order`,{address,phoneNumber}  ,
+    //             { headers: { Authorization: `Tariq__${token}` } });
+    //             console.log(data);
+    //     }catch(error){
+    //         console.log(error);
+    //     }
+    // }
+    // useEffect (()=>{
+    //     creatOrder('nablus','0592100103')
+    // },[] )
 
     return <ContextCart.Provider value={{
         addToCartContext,
@@ -107,7 +108,6 @@ export function ContextCartProvider({ children }) {
         clearCartContext,
          IncraseQuantityContext,
         decreaseQuantityContext,
-        creatOrderContext
     }}>
         {children}
     </ContextCart.Provider>;
