@@ -6,19 +6,31 @@ export let UserContext = createContext();
 export function UserContextProvider({ children }) {
 
     const [userToken, setUserToken] = useState(null);
-    const [userData , setUserData] = useState(null)
+    const [userData, setUserData] = useState(null)
+    const [userOrder, setUserOrder] = useState(null)
+    const [Loading, setLoading] = useState(true)
     const getUserData = async () => {
         if (userToken) {
             const { data } = await axios.get('https://ecommerce-node4.vercel.app/user/profile',
-            {headers:{authorization:`Tariq__${userToken}`}})
+                { headers: { Authorization: `Tariq__${userToken}` } })
             setUserData(data.user);
+            setLoading(false);
         }
     }
-    useEffect(()=>{
+    const getUserOrder = async () => {
+        if (userToken) {
+            const { data } = await axios.get('https://ecommerce-node4.vercel.app/order',
+                { headers: { Authorization: `Tariq__${userToken}` } })
+            console.log(data);
+            setLoading(false);
+        }
+    }
+    useEffect(() => {
         getUserData();
-    } ,[userToken])
+        getUserOrder();
+    }, [userToken])
 
-    return <UserContext.Provider value={{ userToken, setUserToken ,userData,getUserData ,setUserData }}>
+    return <UserContext.Provider value={{ userToken, setUserToken, userData, getUserData, setUserData, Loading }}>
         {children}
     </UserContext.Provider>
 }

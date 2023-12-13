@@ -2,17 +2,30 @@ import React, { useContext } from 'react'
 import { ContextCart } from '../context/Cart';
 import './Cart.css'
 import { useQuery } from 'react-query';
+import { Link } from 'react-router-dom';
 export default function Cart() {
-  const { getCartContext,removeItemContext } = useContext(ContextCart);
+  const { getCartContext, removeItemContext ,clearCartContext ,IncraseQuantityContext,decreaseQuantityContext } = useContext(ContextCart);
   const getCart = async () => {
     const res = await getCartContext();
     return res;
   }
-  const removeCart = async (productId)=>{
-      const res = await removeItemContext(productId);
-      return res;
+  const removeCart = async (productId) => {
+    const res = await removeItemContext(productId);
+    return res;
   }
-  
+
+  const clearCart = async ()=>{
+    const res = await clearCartContext();
+    return res;
+  }
+  const IncraseQuantity = async (productId) => {
+    const res = await IncraseQuantityContext(productId);
+    return res;
+  }
+  const decreaseQuantity = async (productId) => {
+    const res = await decreaseQuantityContext(productId);
+    return res;
+  }
   const { data, isLoading } = useQuery('cart', getCart);
   if (isLoading) {
     return (
@@ -47,7 +60,7 @@ export default function Cart() {
                       <div className="product-details">
                         <h2>{product.details.name}</h2>
                         <span>Color:black</span>
-                        <a href="#" onClick={()=>removeCart(product.details._id)}>
+                        <a href="#" onClick={() => removeCart(product.details._id)}>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width={24}
@@ -67,7 +80,7 @@ export default function Cart() {
                       </div>
                     </div>
                     <div className="quantity">
-                      <button>
+                      <button onClick={()=>decreaseQuantity(product.details._id)}>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width={16}
@@ -85,7 +98,7 @@ export default function Cart() {
                         </svg>
                       </button>
                       <span>{product.quantity}</span>
-                      <button>
+                      <button onClick={()=>IncraseQuantity(product.details._id)}>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width={16}
@@ -103,7 +116,7 @@ export default function Cart() {
                       </button>
                     </div>
                     <div className="price">{product.details.price}</div>
-                    <div className="subtotal">${product.details.price *product.quantity }</div>
+                    <div className="subtotal">${product.details.price * product.quantity}</div>
                   </div>
                 )
               ) : <h2>cart is empty</h2>}
@@ -140,13 +153,17 @@ export default function Cart() {
                   <label className="total">Total</label>
                   <span>$1345.00</span>
                 </div>
+                <Link to="order">
                 <div className="checkout">
                   <a href="#">Chekout</a>
                 </div>
+                </Link>
+                
               </div>
             </div>
           </div>
 
+          <button className='btn btn-danger w-25' onClick={clearCart}>Clear Cart</button>
 
 
 

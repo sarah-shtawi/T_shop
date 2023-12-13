@@ -27,7 +27,7 @@ export default function Navbar() {
                 <Link className="nav-link text-black fw-bold" to="/">Home</Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link text-black fw-bold" href="#">Categories</a>
+                <Link className="nav-link text-black fw-bold" to="/categories">Categories</Link>
               </li>
               <li className="nav-item">
                 <a className="nav-link text-black fw-bold" href="#">Products</a>

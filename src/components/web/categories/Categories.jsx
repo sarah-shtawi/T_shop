@@ -15,15 +15,11 @@ export default function Categories() {
     return data;
   }
   const { data, isLoading } = useQuery('web_category', getCategories);
-  
-
-
   if (isLoading) {
     return (
       <h2>..loading</h2>
     )
   }
-
   return (
     <>
       <div className='container'>

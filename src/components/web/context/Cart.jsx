@@ -5,7 +5,6 @@ export const ContextCart = createContext(null);
 
 export function ContextCartProvider({ children }) {
     let [count, setCount] = useState(0);
-
     const addToCartContext = async (productId) => {
         try {
             const token = localStorage.getItem("userToken");
@@ -30,7 +29,51 @@ export function ContextCartProvider({ children }) {
             console.log(error);
         }
     }
+    const removeItemContext = async (productId) => {
+        try {
+            const token = localStorage.getItem('userToken');
+            const { data } = await axios.patch(`https://ecommerce-node4.vercel.app/cart/removeItem`, { productId },
+                { headers: { Authorization: `Tariq__${token}` } });
+            return data;
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
+    const clearCartContext = async () => {
+        try {
+            const token = localStorage.getItem('userToken');
+            const { data } = await axios.patch(`${import.meta.env.VITE_API_URL}/cart/clear`, {},
+                { headers: { Authorization: `Tariq__${token}` } });
+            return data;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const IncraseQuantityContext = async (productId) => {
+        try {
+            const token = localStorage.getItem('userToken');
+            const { data } = await axios.patch(`${import.meta.env.VITE_API_URL}/cart/incraseQuantity`, { productId },
+                { headers: { Authorization: `Tariq__${token}` } });
+            return data;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const decreaseQuantityContext = async (productId) => {
+        try {
+            const token = localStorage.getItem('userToken');
+            const { data } = await axios.patch(`${import.meta.env.VITE_API_URL}/cart/decraseQuantity`, { productId },
+                { headers: { Authorization: `Tariq__${token}` } });
+                return data;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    
     const getCartContext = async () => {
         try {
             const token = localStorage.getItem('userToken');
@@ -44,19 +87,28 @@ export function ContextCartProvider({ children }) {
         }
     }
 
-    const removeItemContext = async (productId) => {
-        try {
+    const creatOrderContext = async (address,phone) => {
+        try{
             const token = localStorage.getItem('userToken');
-            const { data } = await axios.patch(`https://ecommerce-node4.vercel.app/cart/removeItem`, { productId },
-                { headers: { Authorization: `Tariq__${token}` } });
+            const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/order`,{address,phone} ,
+            {headers: { Authorization: `Tariq__${token}` } });
             return data;
-        } catch (error) {
+        }catch(error){
             console.log(error);
         }
     }
    
-   
-    return <ContextCart.Provider value={{ addToCartContext, getCartContext, removeItemContext, count, setCount }}>
+
+    return <ContextCart.Provider value={{
+        addToCartContext,
+        getCartContext,
+        removeItemContext,
+        count, setCount,
+        clearCartContext,
+         IncraseQuantityContext,
+        decreaseQuantityContext,
+        creatOrderContext
+    }}>
         {children}
     </ContextCart.Provider>;
 }

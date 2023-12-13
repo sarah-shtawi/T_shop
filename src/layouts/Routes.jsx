@@ -14,78 +14,102 @@ import Layout from "./Layout.jsx";
 import Profile from "../components/web/profile/Profile.jsx";
 import SendCode from "../components/web/auth/sendCode/SendCode.jsx";
 import ForgetPassword from "../components/web/auth/forgetPassword/ForgetPassword.jsx";
-  export const router = createBrowserRouter([
-    {
-      path: '/',
-      element: <Layout/>,
-      children: [
-        {
-          path: 'register',
-          element: <Register />
-        },
-        {
-          path: '/login',
-          element: <Login />
-        },
-        {
-          path: '/',
-          element: <Home />
-        },
-        {
-          path: '/home',
-          element: <Home />
-        },
-        {
-          path: '/products/category/:categoryId',
-          element: <CategoriesDetails />
-        },
-        {
-          path: `/product/:productId`,
-          element: <Product/>
-        },
-        {
-          path: 'categories',
-          element: <Categories />
-        },
-        {
-          path: 'profile',
-          element: <Profile />
-        },
-        {
-          path: 'sendCode',
-          element: <SendCode />
-        },
-        {
-          path: 'forgetPassword',
-          element: <ForgetPassword />
-        },
-        {
-          path: 'cart',
-          element: <ProtectedRoutes>
-            <Cart />
-          </ProtectedRoutes>
-        },
-        {
-          path: '*',
-          element: <h2>page not found --- web</h2>
-        }
-      ]
-    },
-    {
-      path: '/dashboard',
-      element: <DashboardLayout />,
-      children: [{
-        path: 'home',
-        element: <HomeDashboard />
-      }
-        , {
+import UserInfo from "../components/web/profile/UserInfo.jsx";
+import UserContact from "../components/web/profile/UserContact.jsx";
+import Order from "../components/web/order/Order.jsx";
+import UserOrder from "../components/web/profile/UserOrder.jsx";
+export const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Layout />,
+    children: [
+      {
+        path: 'register',
+        element: <Register />
+      },
+      {
+        path: '/login',
+        element: <Login />
+      },
+      {
+        path: '/',
+        element: <Home />
+      },
+      {
+        path: '/home',
+        element: <Home />
+      },
+      {
+        path: '/products/category/:categoryId',
+        element: <CategoriesDetails />
+      },
+      {
+        path: `/product/:productId`,
+        element: <Product />
+      },
+      {
         path: 'categories',
-        element: <CategoriesDashboard />
+        element: <Categories />
+      },
+      {
+        path: 'profile',
+        element: <ProtectedRoutes>
+                    <Profile />
+               </ProtectedRoutes>,
+       children :[
+        {
+          index:true,
+          element: <UserInfo/>
+        },
+        {
+          path: 'contact',
+          element: <UserContact/>
+        },
+        {
+          path: 'UserOrder',
+          element: <UserOrder/>
+        }
+       ]        
+      },
+      {
+        path: 'sendCode',
+        element: <SendCode />
+      },
+      {
+        path: 'forgetPassword',
+        element: <ForgetPassword />
+      },
+      {
+        path: 'cart/order',
+        element: <Order />
+      },
+      {
+        path: 'cart',
+        element: <ProtectedRoutes>
+          <Cart />
+        </ProtectedRoutes>
       },
       {
         path: '*',
-        element: <h2>page not found --- dashboard</h2>
+        element: <h2>page not found --- web</h2>
       }
-      ]
+    ]
+  },
+  {
+    path: '/dashboard',
+    element: <DashboardLayout />,
+    children: [{
+      path: 'home',
+      element: <HomeDashboard />
     }
-  ]);
+      , {
+      path: 'categories',
+      element: <CategoriesDashboard />
+    },
+    {
+      path: '*',
+      element: <h2>page not found --- dashboard</h2>
+    }
+    ]
+  }
+]);

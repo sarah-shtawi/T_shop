@@ -13,7 +13,7 @@ export default function App() {
       setUserToken(localStorage.getItem('userToken'));
     }
     setCount(getCartContext().count);
-  }, []);
+  }, [userToken]);
 
 
   return (
