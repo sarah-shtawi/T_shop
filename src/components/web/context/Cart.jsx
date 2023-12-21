@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { createContext, useEffect, useState } from 'react';
+import { createContext,  useState } from 'react';
 import { toast } from 'react-toastify'
 export const ContextCart = createContext(null);
 export function ContextCartProvider({ children }) {
@@ -86,19 +86,7 @@ export function ContextCartProvider({ children }) {
         }
     }
 
-    // const creatOrder = async (address,phoneNumber)=>{
-    //     try{
-    //         const token = localStorage.getItem('userToken');
-    //         const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/order`,{address,phoneNumber}  ,
-    //             { headers: { Authorization: `Tariq__${token}` } });
-    //             console.log(data);
-    //     }catch(error){
-    //         console.log(error);
-    //     }
-    // }
-    // useEffect (()=>{
-    //     creatOrder('nablus','0592100103')
-    // },[] )
+
 
     return <ContextCart.Provider value={{
         addToCartContext,

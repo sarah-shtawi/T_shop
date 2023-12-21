@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React from 'react'
+import React, { useState } from 'react'
 import { useQuery } from 'react-query';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
@@ -8,16 +8,21 @@ import 'swiper/css/pagination';
 import 'swiper/css';
 import './Categories.css'
 import { Link } from 'react-router-dom';
+import Loader from '../../loading/Loader';
 export default function Categories() {
-
+  const [loading, setLoading] = useState(false);
   const getCategories = async () => {
-    const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/categories`)
+    setLoading(true);
+    const token = localStorage.getItem('userToken');
+    const { data } = await axios.get(`https://ecommerce-node4.vercel.app/categories`,
+      { headers: { Authorization: `Tariq__${token}` } });
+    setLoading(false);
     return data;
   }
-  const { data, isLoading } = useQuery('web_category', getCategories);
-  if (isLoading) {
+  const { data } = useQuery('web_category', getCategories);
+  if (loading) {
     return (
-      <h2>..loading</h2>
+      <Loader/>
     )
   }
   return (
@@ -44,8 +49,7 @@ export default function Categories() {
               <SwiperSlide key={category._id}>
                 <Link to={`/products/category/${category._id}`}>
                   <div className='category'>
-                    <img src={category.image.secure_url} className='rounded-circle' />
-                    <h2 className='fs-5'>{category.name}</h2>
+                    <img src={category.image.secure_url} className='border-raduis w-100 h-100' />
                   </div>
                 </Link>
               </SwiperSlide>

@@ -16,21 +16,15 @@ import SendCode from "../components/web/auth/sendCode/SendCode.jsx";
 import ForgetPassword from "../components/web/auth/forgetPassword/ForgetPassword.jsx";
 import UserInfo from "../components/web/profile/UserInfo.jsx";
 import UserContact from "../components/web/profile/UserContact.jsx";
-import Order from "../components/web/order/Order.jsx";
 import UserOrder from "../components/web/profile/UserOrder.jsx";
+import Order from "../components/web/order/Order.jsx";
+import AllProducts from "../components/web/products/AllProducts.jsx";
 export const router = createBrowserRouter([
   {
     path: '/',
     element: <Layout />,
     children: [
-      {
-        path: 'register',
-        element: <Register />
-      },
-      {
-        path: '/login',
-        element: <Login />
-      },
+     
       {
         path: '/',
         element: <Home />
@@ -38,6 +32,10 @@ export const router = createBrowserRouter([
       {
         path: '/home',
         element: <Home />
+      },
+      {
+        path: 'categories',
+        element: <Categories />
       },
       {
         path: '/products/category/:categoryId',
@@ -48,8 +46,8 @@ export const router = createBrowserRouter([
         element: <Product />
       },
       {
-        path: 'categories',
-        element: <Categories />
+        path: `products`,
+        element:<AllProducts /> , 
       },
       {
         path: 'profile',
@@ -71,6 +69,16 @@ export const router = createBrowserRouter([
         }
        ]        
       },
+
+      {
+        path: 'register',
+        element: <Register />
+      },
+      {
+        path: '/login',
+        element: <Login />
+      },
+
       {
         path: 'sendCode',
         element: <SendCode />
@@ -95,6 +103,7 @@ export const router = createBrowserRouter([
       }
     ]
   },
+
   {
     path: '/dashboard',
     element: <DashboardLayout />,

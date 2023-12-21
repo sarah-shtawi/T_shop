@@ -1,11 +1,13 @@
-form{
-    border: solid 6px palevioletred;
-    background-color: pink;
+.form{
+    width: 44%;
+    background-color:transparent !important;
+    border:  3px solid  #5d6e70 ;
+}
+.input{
+    border: 1px solid  #5d6e70;
+    padding: 10px 40px ;
 }
 .send-data{
-    background-color: palevioletred;
+    background-color: #5d6e70;
     border: none !important;
-}
-body{
-    background-color:rgb(241, 181, 201);
 }

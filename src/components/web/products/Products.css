@@ -1,0 +1,30 @@
+.reviews {
+    border: 5px solid  #5d6e70;
+}
+.Details{
+    color:white;
+    background-color: #5d6e70 ;
+    text-decoration: none !important;
+    font-weight: 700;
+    padding: 10px;
+}
+.Rating{
+    color: rgb(66, 59, 59);
+}
+.allProducts {
+    border: 1px solid   #5d6e70;
+}
+.nameProduct{
+    height: 20%;
+}
+input::placeholder{
+    color: #5d6e70 ;
+    font-weight: 500;
+}
+input , .select{
+    border:1px solid  #5d6e70 !important ;
+}
+.AddCart{
+    background-color: #5d6e70 !important;
+    border: none !important;
+}

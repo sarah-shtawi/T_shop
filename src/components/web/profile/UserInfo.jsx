@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import { UserContext } from '../context/User';
+import Loader from '../../loading/Loader';
 
 
 export default function UserInfo() {
@@ -7,7 +8,7 @@ export default function UserInfo() {
 
     if(Loading){
         return (
-            <p>...loading</p>
+            <Loader/>
         )
     }
     return (

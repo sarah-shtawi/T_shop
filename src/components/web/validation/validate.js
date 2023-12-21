@@ -17,7 +17,7 @@ export const ForgetPasswordSchema = yup.object({
 })
 export const OrderSchema = yup.object({
     address:yup.string().required('address is required'),  
-    phoneNumber:yup.string().required('phone is required'),
+    phone:yup.string().required('phone is required'),
 })
 export const SendCodeSchema = yup.object({
     email:yup.string().required('email is required').email(),

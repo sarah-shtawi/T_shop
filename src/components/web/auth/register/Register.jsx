@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Input from '../../../pages/Input.jsx'
 import './register.css'
 import { useFormik } from 'formik'
 import { registerSchema } from '../../validation/validate.js'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import Loader from '../../../loading/Loader.jsx'
 export default function Register() {
+    const [loading ,setLoading] = useState(false);
+
     const initialValues = {
         userName: '',
         email: '',
@@ -16,12 +19,12 @@ export default function Register() {
         formik.setFieldValue('image',event.target.files[0]);
     }
     const onSubmit = async users => {
+        setLoading(true);
         const formData = new FormData();
         formData.append('userName', users.userName);
         formData.append('email', users.email);
         formData.append('password', users.password);
         formData.append('image', users.image);
-
         const {data} = await axios.post(`https://ecommerce-node4.vercel.app/auth/signup`,formData);
         if(data.message == 'success'){
             formik.resetForm();
@@ -35,6 +38,8 @@ export default function Register() {
                 progress: undefined,
                 theme: "dark",
                 });
+                setLoading(false);
+
         }        
     }
 
@@ -88,13 +93,19 @@ export default function Register() {
             key={index} />
     );
 
+    if(loading){
+        return (
+            <Loader/>
+        )
+    }
+
     return (
         <>
             <div className='container '>
-                <h2 className='text-center mt-5 mb-0'>Create account</h2>
-                <form className='p-4 w-50 m-auto mt-4' onSubmit={formik.handleSubmit} encType='multipart/form-data'>
+                <h2 className='text-center mt-5 mb-0'>Create Account</h2>
+                <form className='p-4 w-50 m-auto mt-4 form ' onSubmit={formik.handleSubmit} encType='multipart/form-data'>
                     {renderInput}
-                    <button type='submit' disabled={!formik.isValid} className="mt-3 p-2 w-25 text-black fw-bold send-data" >Register</button>
+                    <button type='submit' disabled={!formik.isValid} className="mt-3 p-2 w-25 text-white fw-medium  send-data" >Register</button>
                 </form>
             </div>
         </>

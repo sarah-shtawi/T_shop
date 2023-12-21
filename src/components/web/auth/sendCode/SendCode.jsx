@@ -1,17 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Input from '../../../pages/Input.jsx'
 import { useFormik } from 'formik'
 import {  SendCodeSchema } from '../../validation/validate.js'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import {  useNavigate } from 'react-router-dom'
+import Loader from '../../../loading/Loader.jsx'
 
 export default function Login() {
     const navigate = useNavigate();
+    const [loading ,setLoading] = useState(false);
     const initialValues = {
         email: '',
     };
     const onSubmit = async users => {
+        setLoading(true);
         const { data } = await axios.patch(`https://ecommerce-node4.vercel.app/auth/sendcode`, users);
         if (data.message == 'success') {
             toast.success('code sent ', {
@@ -25,6 +28,8 @@ export default function Login() {
                 theme: "dark",
             });
             navigate('/forgetPassword')
+            setLoading(false);
+
         }
     }
     const formik = useFormik({
@@ -53,6 +58,11 @@ export default function Login() {
             touched={formik.touched}
             key={index} />
     );
+    if(loading){
+        return (
+            <Loader/>
+        )
+    }
     return (
         <>
             <div className='container '>

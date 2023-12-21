@@ -9,8 +9,6 @@ img{
     display: flex;
     flex-direction: column;
     align-items: center;
-
-
 }
 .swiper-button-prev , .swiper-button-next{
     background-color: #fff;

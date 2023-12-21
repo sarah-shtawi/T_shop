@@ -5,7 +5,7 @@
     
 }
 .profileLinks nav{
-    background-color:palevioletred ;
+    background-color: #5d6e70 ;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -14,14 +14,15 @@
 }
 .profileLinks{
     width: 300px;
-
 }
 .userData{
     flex-grow: 1;
 }
 nav a{
-    color: black;
-    font-weight: bolder;
+    color: white ;
     font-size: 20px;
     text-decoration: none;
+}
+.table1{
+  color:#525252 !important;
 }

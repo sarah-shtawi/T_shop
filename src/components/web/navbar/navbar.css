@@ -1,3 +1,9 @@
 .navbar{
-    background-color: palevioletred !important;
+    background-color:  #5d6e70 !important;
+    padding: 15px;
 }
+.navbar a {
+    color: white;
+    font-weight: 600 !important;
+}
+

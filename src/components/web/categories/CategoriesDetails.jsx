@@ -1,38 +1,36 @@
 import axios from 'axios';
-import React from 'react'
+import React, { useState } from 'react'
 import { useQuery } from 'react-query';
 import { Link, useParams } from 'react-router-dom';
+import Loader from '../../loading/Loader';
 
 export default function CategoriesDetails() {
     const { categoryId } = useParams();
-    //console.log(categoryId);
+    const [loading, setLoading] = useState(false);
 
     const getCategoriesDedails = async () => {
+        setLoading(true);
         const { data } = await axios.get(`https://ecommerce-node4.vercel.app/products/category/${categoryId}`);
+        setLoading(false);
         return data.products;
-        /// console.log(data);
     }
-    const { data, isLoading } = useQuery('category datails', getCategoriesDedails);
-    if (isLoading) {
+    const { data } = useQuery('category datails', getCategoriesDedails);
+    if (loading) {
         return (
-            <p>... loading</p>
+            <Loader/>
         )
     }
     return (
-        <div className='container'>
-
-        
-        <div className='products'>
-            {data?.length ? data.map((product) =>
-                <div className='product d-flex' key={product._id}>
-                        <img src={product.mainImage.secure_url} className='w-25 h-100 img-fluid' />
-                    <div className='m-5 p-5 ms-2'>
-                        <h2>{product.name}</h2>
-                        <Link to={`/product/${product._id}`} className='fs-4 fw-bold'>details About this Product</Link>
+        <div className='container vh-100 '>
+            <div className=' d-flex justify-content-center align-items-center pt-5 mt-3'>
+                {data?.length ? data.map((product) =>
+                    <div className='w-100 text-center allProducts p-5 me-2'>
+                        <img key={product._id} src={product.mainImage.secure_url} className='w-75 h-75 border rounded img-fluid' />
+                        <p className='fw-bolder mt-2'>{product.name}</p>
+                        <Link to={`/product/${product._id}`} className='rounded Details'>Details</Link>
                     </div>
-                </div>
-            ) : <h2>no product</h2>}
-        </div>
+                    ) : <h2>no product</h2>}
+            </div>
         </div>
     )
 }
