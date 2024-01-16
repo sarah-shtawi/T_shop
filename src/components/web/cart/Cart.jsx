@@ -7,8 +7,6 @@ import Loader from '../../loading/Loader';
 export default function Cart() {
   const { getCartContext, removeItemContext ,clearCartContext ,IncraseQuantityContext,decreaseQuantityContext } = useContext(ContextCart);
   const [loading ,setLoading] = useState(false);
-
-  
   const getCart = async () => {
     setLoading(true);
     const res = await getCartContext();
@@ -166,7 +164,7 @@ export default function Cart() {
                 </div>
                 <Link to="order">
                 <div className="checkout">
-                  <a href="#">Chekout</a>
+                  <a href="#">CreatOrder</a>
                 </div>
                 </Link>
                 
